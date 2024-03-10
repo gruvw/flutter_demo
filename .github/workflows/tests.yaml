@@ -26,7 +26,7 @@ jobs:
         uses: reactivecircus/android-emulator-runner@v2
         id: instrumentation-tests
         with:
-          api-level: 34
+          api-level: 29
           target: google_apis
           arch: x86_64
           avd-name: github
@@ -35,5 +35,5 @@ jobs:
           disable-animations: true
           script: |
             flutter test --coverage -r github --coverage-path=coverage/lcov.base.info test
-            flutter test --coverage -r github --merge-coverage integration_test -d linux
+            flutter test --coverage -r github --merge-coverage integration_test -d github
             dlcov --coverage=80 --include-untested-files=true --log=true
