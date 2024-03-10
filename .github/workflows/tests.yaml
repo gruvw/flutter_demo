@@ -35,5 +35,5 @@ jobs:
           disable-animations: true
           script: |
             flutter test --coverage -r github --coverage-path=coverage/lcov.base.info test
-            flutter test --coverage -r github --merge-coverage integration_test -d github
+            flutter test --coverage -r github --merge-coverage integration_test -d emulator
             dlcov --coverage=80 --include-untested-files=true --log=true
