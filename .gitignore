@@ -44,3 +44,4 @@ app.*.map.json
 
 coverage/
 *.lock
+dlcov_references_test.dart
