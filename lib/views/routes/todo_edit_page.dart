@@ -4,6 +4,8 @@ import "package:flutter_hooks/flutter_hooks.dart";
 import "package:hooks_riverpod/hooks_riverpod.dart";
 
 class TodoEditPage extends HookConsumerWidget {
+  static const deleteKey = Key("delete");
+
   final String itemId;
 
   const TodoEditPage({
@@ -87,6 +89,7 @@ class TodoEditPage extends HookConsumerWidget {
               ),
               const SizedBox(height: 20),
               OutlinedButton(
+                key: deleteKey,
                 onPressed: () {
                   viewModel.removeTodo(itemId);
                   Navigator.pop(context);

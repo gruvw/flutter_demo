@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
 import "package:flutter_demo/main.dart";
+import "package:flutter_demo/views/components/todo_view.dart";
 import "package:flutter_demo/views/routes/overview.dart";
+import "package:flutter_demo/views/routes/todo_edit_page.dart";
 import "package:flutter_test/flutter_test.dart";
 import "package:hooks_riverpod/hooks_riverpod.dart";
 
@@ -23,12 +25,27 @@ void main() {
 
       expect(find.text("hey"), findsOneWidget);
 
-      final fab = find.byKey(const Key("new"));
+      final fab = find.byKey(OverviewPage.addKey);
 
       expect(fab, findsOneWidget);
 
       await tester.tap(fab);
       await tester.pumpAndSettle();
+
+      final delete = find.byKey(TodoEditPage.deleteKey);
+      await tester.tap(delete);
+      await tester.pumpAndSettle();
+
+      final list = find.byKey(OverviewPage.listKey);
+      final todos = find.descendant(of: list, matching: find.byType(TodoView));
+      expect(todos, findsOneWidget);
+
+      final edit =
+          find.descendant(of: todos, matching: find.byType(IconButton));
+      await tester.tap(edit);
+      await tester.pumpAndSettle();
+
+      expect(find.byType(TodoEditPage), findsOneWidget);
     });
   });
 }

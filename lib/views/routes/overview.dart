@@ -7,6 +7,9 @@ import "package:hooks_riverpod/hooks_riverpod.dart";
 import "package:nanoid/nanoid.dart";
 
 class OverviewPage extends HookConsumerWidget {
+  static const listKey = Key("list");
+  static const addKey = Key("add");
+
   const OverviewPage({super.key});
 
   @override
@@ -19,12 +22,13 @@ class OverviewPage extends HookConsumerWidget {
         backgroundColor: Colors.lightBlue,
       ),
       body: ListView(
+        key: listKey,
         children: [
           for (final todo in todos) TodoView(item: todo),
         ],
       ),
       floatingActionButton: FloatingActionButton(
-        key: const Key("new"),
+        key: addKey,
         onPressed: () {
           final newItem = TodoItem(
             id: nanoid(),

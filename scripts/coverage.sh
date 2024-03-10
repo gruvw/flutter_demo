@@ -6,5 +6,5 @@ dlcov gen-refs
 flutter test --coverage -r github test
 
 # Show coverage info
-genhtml coverage/lcov.info -o coverage/html
+genhtml -q coverage/lcov.info -o coverage/html
 dlcov -c 80
