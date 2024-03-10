@@ -15,7 +15,7 @@ void main() {
       final fab = find.byKey(const Key("new"));
 
       expect(fab, findsOneWidget);
-      expect(true, false);
+
       await tester.tap(fab);
       await tester.pumpAndSettle();
     });
