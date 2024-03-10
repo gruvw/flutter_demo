@@ -52,7 +52,7 @@ jobs:
           emulator-options: -no-snapshot-save -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
           disable-animations: true
           script: |
-            pub global activate dlcov
+            dart pub global activate dlcov
             dlcov gen-refs
             flutter test --coverage -r github --coverage-path=coverage/lcov.base.info test
             flutter test --coverage -r github --merge-coverage integration_test -d emulator
