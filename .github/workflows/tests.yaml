@@ -3,15 +3,37 @@ name: Hello World
 on:
   push:
     branches:
-      - main  # Change this to your main branch name if it's different
+      - main
 
 jobs:
-  say-hello:
+  flutter-tests:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Echo Hello World
-      run: echo "Hello, World!"
+      - name: Setup Flutter SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+
+      - name: Install Flutter dependencies
+        run: |
+          flutter --version
+          flutter pub get
+
+      - name: Run instrumentation tests
+        uses: reactivecircus/android-emulator-runner@v2
+        id: instrumentation-tests
+        with:
+          api-level: 34
+          target: google_apis
+          arch: x86_64
+          avd-name: github
+          force-avd-creation: true
+          emulator-options: -no-window -gpu swiftshader_indirect -noaudio -no-boot-anim -camera-back none
+          disable-animations: true
+          script: |
+            flutter test --coverage -r github --coverage-path=coverage/lcov.base.info test
+            flutter test --coverage -r github --merge-coverage integration_test -d linux
+            dlcov --coverage=80 --include-untested-files=true --log=true
