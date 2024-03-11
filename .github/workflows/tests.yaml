@@ -16,11 +16,22 @@ jobs:
         uses: subosito/flutter-action@v2
         with:
           channel: stable
+          cache: true
+      - run: |
+          flutter config --no-analytics --no-cli-animations
+          flutter --version
 
       - name: Install Flutter dependencies
         run: |
-          flutter --version
           flutter pub get
+
+      - name: Check code formatting
+        run: |
+          dart format --output=none --set-exit-if-changed .
+
+      - name: Check for code errors
+        run: |
+          flutter analyze
 
       - name: Flutter testing
         run: |
