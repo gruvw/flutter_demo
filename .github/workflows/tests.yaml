@@ -19,7 +19,7 @@ jobs:
           cache: true
 
       - name: Check Flutter SDK
-      - run: |
+        run: |
           flutter config --no-analytics --no-cli-animations
           flutter --version
 
