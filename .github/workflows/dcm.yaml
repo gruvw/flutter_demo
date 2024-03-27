@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  flutter-tests:
+  dart_code_metrics:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -27,4 +27,4 @@ jobs:
       - name: Dart Code Metrics
         run: |
           dart pub global activate -s git https://github.com/gruvw/dart_code_metrics.git
-          (metrics analyze lib --reporter=github || true) | tail -n +3 >> $GITHUB_STEP_SUMMARY
+          (metrics analyze lib --reporter=console || true) | tail -n +3 >> $GITHUB_STEP_SUMMARY
